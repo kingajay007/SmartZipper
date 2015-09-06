@@ -6,17 +6,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <StackPanel>
+        <StackPanel>
+            <TextBlock Margin="10 10 0 0" FontSize="36" Foreground="CadetBlue">
+                <TextBlock.Text>Smart Zipper</TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+        <Button Background="Blue" Height="150" Width="200" Margin="0 40 0 50" HorizontalAlignment="Center" FontSize="40" Click="Button_Click">
+            <Button.Content>Extract</Button.Content>
+            
+        </Button>
+        <Button Height="150" Background="Crimson" Width="200" Margin="0 20 0 50" HorizontalAlignment="Center" FontSize="40" Click="Button_Click_1">
+            <Button.Content>Compress</Button.Content>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RenderTransformOrigin="0.486,0.508">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="211*"/>
-            <ColumnDefinition Width="149*"/>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="btnSelectFile" Grid.ColumnSpan="2" Content="Select File" HorizontalAlignment="Left" Margin="210,65,0,0" VerticalAlignment="Top" Width="100" Click="btnSelectFile_Click"/>
-        <TextBlock x:Name="lblFileName" Grid.Column="1" HorizontalAlignment="Left" Margin="4,125,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <Button x:Name="btnSelectFolder" Content="Save" Grid.Column="1" HorizontalAlignment="Left" Margin="44,195,0,0" VerticalAlignment="Top" Click="btnSelectFolder_Click"/>
-        <TextBox x:Name="txtFilePath" HorizontalAlignment="Left" Margin="20,63,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" RenderTransformOrigin="0.563,-0.312" Width="165"/>
-        <ProgressRing Name="progressRing" HorizontalAlignment="Left" Margin="105,295,0,0" VerticalAlignment="Top" Height="60" Width="80"/>
-
-    </Grid>
+        </Button>
+    </StackPanel>    
 </Page>

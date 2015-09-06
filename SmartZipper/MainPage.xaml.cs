@@ -18,6 +18,7 @@ using System.IO.Compression;
 using System.Threading.Tasks;
 using Windows.Media.Devices;
 using Windows.Graphics.Display;
+using SmartZipper.Views;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -32,71 +33,17 @@ namespace SmartZipper
         public MainPage()
         {
             this.InitializeComponent();
+            //this.Frame.Navigate(typeof(Extraction));
         }
 
-        private async void btnSelectFile_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker fop = new FileOpenPicker();
-            
-            
-            fop.SuggestedStartLocation = PickerLocationId.ComputerFolder;
-            fop.ViewMode = PickerViewMode.List;
-            fop.FileTypeFilter.Add(".zip");
-            file = await fop.PickSingleFileAsync();
-            
-           
-
+            this.Frame.Navigate(typeof(Extraction));
         }
 
-        private async void btnSelectFolder_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
-            if (file != null)
-            {
-                lblFileName.Text = file.Name + " Selected";
-            }
-            else
-            {
-                lblFileName.Text = "No File Selected";
-            }
-
-            FolderPicker folderPicker = new FolderPicker();
-            folderPicker.ViewMode = PickerViewMode.List;
-            folderPicker.FileTypeFilter.Add("*");
-            folderPicker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
-            StorageFolder folder = await folderPicker.PickSingleFolderAsync();
-            string mruToken = Windows.Storage.AccessCache.StorageApplicationPermissions.MostRecentlyUsedList.Add(folder, folder.Name);
-
-            //StorageFolder storageFolder = await DownloadsFolder.CreateFolderAsync("iii");
-            //StorageFolder storageFolder = await DownloadsFolder.CreateFolderAsync("Sample");
-            Stream stream = await file.OpenStreamForReadAsync();
-
-            using (var archive = new ZipArchive(stream, ZipArchiveMode.Read))
-            {
-                
-                    try
-                    {
-                    StorageFolder folderToSave = await Windows.Storage.AccessCache.StorageApplicationPermissions.MostRecentlyUsedList.GetFolderAsync(mruToken);
-                    StorageFolder fileNameFolder =await folderToSave.CreateFolderAsync(file.Name.Replace(".zip",""));
-                    if (!string.IsNullOrEmpty(fileNameFolder.Path))
-                    {
-                        progressRing.IsActive = true;
-                        await Task.Run(() => archive.ExtractToDirectory(fileNameFolder.Path));
-                        lblFileName.Text = "Files extracted successfully...";
-                        progressRing.IsActive = false;
-                    }
-                    
-                    }
-                    catch (Exception ex)
-                    {
-                        lblFileName.Text = ex.Message;
-                    }
-            }
-
-
-           
+            this.Frame.Navigate(typeof(Compression));
         }
-
-        
     }
 }
